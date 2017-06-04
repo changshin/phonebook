@@ -1,0 +1,40 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	      version="3.0">
+ 
+  <display-name>RCM Web App</display-name>
+  
+  
+    <!--This mapping makes the favicon works on Tomcat-->
+    <mime-mapping>
+        <extension>ico</extension>
+        <mime-type>image/x-icon</mime-type>
+        <!--<mime-type>image/vnd.microsoft.icon</mime-type>-->
+    </mime-mapping>
+
+    <mime-mapping>
+        <extension>eot</extension>
+        <mime-type>application/vnd.ms-fontobject</mime-type>
+    </mime-mapping>
+
+    <mime-mapping>
+        <extension>svg</extension>
+        <mime-type>image/svg+xml</mime-type>
+    </mime-mapping>
+
+    <mime-mapping>
+        <extension>ttf</extension>
+        <mime-type>application/x-font-ttf</mime-type>
+        <!--<mime-type>font/ttf</mime-type>-->
+        <!--<mime-type>font/truetype</mime-type>-->
+    </mime-mapping>
+
+    <mime-mapping>
+        <extension>woff</extension>
+        <mime-type>application/x-font-woff</mime-type>
+        <!--<mime-type>font/x-woff</mime-type>-->
+    </mime-mapping>
+  
+</web-app>

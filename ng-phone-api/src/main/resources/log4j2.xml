@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" name="console" packages="">
+	<Appenders>
+		<RollingFile name="phonebook" fileName="/var/log/tomcat7/phonebook.log"
+			filePattern="/var/log/tomcat7/$${date:yyyy-MM}/rcm-%d{yyyy-MM-dd-HH}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy size="50 MB" />
+			</Policies>
+		</RollingFile>
+
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+	</Appenders>
+
+	<Loggers>
+
+		<Logger name="phonebook" level="info" additivity="false">
+			<AppenderRef ref="phonebook" />
+		</Logger>
+
+		<Root level="info">
+			<AppenderRef ref="phonebook" />
+		</Root>
+
+	</Loggers>
+</Configuration>
