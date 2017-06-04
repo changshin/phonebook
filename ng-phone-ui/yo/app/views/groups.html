@@ -1,0 +1,90 @@
+<div class="row row-ht-100 rounded-corner vertical-scroll m-l-p1em " >
+	<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
+		<div class="row-ht-10 adjust clearfix" >
+			<div class="col-md-4 col-sm-4 col-xs-4"><h4>Groups</h4></div>
+			<div class="col-md-4 col-sm-4 col-xs-4">
+				<button class="btn btn-info button-xs" style="margin-left: 10px" ng-click="addRecord()">Add New Group</button>
+			</div>
+		</div>
+		<div class="row" ng-if="showMode == 'add'" style="margin-top:10px;border-top:1px solid #C3BBB6;border-bottom: 1px solid #C3BBB6;">
+			<div class="col-md-1 col-sm-1 col-xs-1"></div>
+			<div class="col-md-10 col-sm-10 col-xs-10"  >
+				<div class="form-group col-lg-12  col-md-12" style="margin-top:10px">
+					<label for="Name" class="col-sm-4 col-md-4 control-label" style="margin-right:-10px">Name:</label>
+					<div class="col-sm-7 col-md-7">
+	          			<input type="text" name="Name" ng-model="selectedRecord.name" required /></td>
+	          		</div>	
+	          	</div>
+				<div class="form-group col-lg-12  col-md-12">
+					<div class="col-sm-4 col-md-4">
+						<button type="button" class="btn btn-info button-xs" ng-click="cancel()">Cancel</button>
+					</div>
+					<div class="col-sm-7 col-md-7">
+						<button type="button" class="btn btn-info button-xs" ng-click="saveRecord()" 
+							ng-confirm-size="md"
+							ng-confirm-header="Add New Group"
+							ng-confirm="Would you like to add new group?">
+							Add
+						</button>
+						
+					</div>
+	          	</div>
+			</div>
+		</div>
+  		<table  class="table table-condensed table-hover table-responsive">
+			<thead>
+				<tr class="header">
+					<th class="user_header"></th>
+					<th class="user_header"><a href="" data-ng-click="orderName = 'name'; reverse=!reverse">Name</a></th>
+					<th class="user_header"><a href="" data-ng-click="orderName = 'userCount'; reverse=!reverse">Users</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat-start="group in groups | orderBy:orderName:reverse track by group.id"
+				 data-ng-class="{selected: hover}" 
+			 	 data-ng-mouseenter="hover = true"
+			 	 data-ng-mouseleave="hover = false"	>
+					<td><a href class="icon-hover" ng-click="editRecord(group)"><img class="img-circle" style="width:40px;height:40px" nocachesrc="{{group.avatarPath || '/images/default_group.jpg'}}" /></a></td>
+					<td><a href class="icon-hover" ng-click="editRecord(group)">{{group.name}}</a></td>
+					<td><a href class="icon-hover" ng-click="showGroupUsers(group)">{{ group.userCount}}</a></td>
+				</tr>
+				<tr data-ng-show="showMode == 'edit' && group.id == selectedRecord.id" >
+					<td colspan="3" class="row">
+                 		<table>
+                 			<tr>
+                 				<td>Name:</td>
+                 				<td><input type="text" name="Name" ng-model="selectedRecord.name" required /></td>
+                 			</tr>	
+                 			<tr>
+                 				<td></td>
+                 				<td>
+	                 				<button type="button" class="btn btn-info button-xs button-sm" ng-click="saveRecord()" 
+										ng-confirm-size="md"
+										ng-confirm-header="Updatde Group Name: {{selectedRecord.name}}"
+										ng-confirm="Would you like to update Group Name?">
+										Update
+									</button>
+									<button type="button" class="btn btn-info button-xs button-sm" ng-click="cancel()">Cancel</button>
+	                 				<button type="button" ng-if="selectedRecord.userCount == 0" class="btn btn-info button-xs button-sm" ng-click="deleteRecord()" 
+										ng-confirm-size="md"
+										ng-confirm-header="Delete Group: {{selectedRecord.name}}"
+										ng-confirm="Would you like to delete Group?">
+										Delete
+									</button>
+                 				</td>
+                 			</tr>	
+                 		</table>
+                 	</td>
+				</tr>
+				<tr data-ng-repeat-end></tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1"></div>
+	<div class="col-md-4 col-sm-4 col-lg-4 col-xs-4" style="margin-top:10px;height:250px;width:300px;">
+		<canvas id="pie" class="chart chart-pie"
+  			chart-data="data" chart-labels="labels" chart-options="options" chart-click="onClick">
+		</canvas> 
+	</div>	
+	
+</div>

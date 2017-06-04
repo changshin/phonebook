@@ -1,0 +1,48 @@
+{
+ "buttons": {
+      "submit": "Submit",
+      "no":"No",
+      "yes":"Yes"
+   },
+   "common":{
+       "email":"Email",
+       "login":"Login"
+   },
+   "header": {
+     "users":"Users",
+     "groups":"Groups",
+     "login": "Login",
+     "logout": "LOGOUT"
+   },
+   "footer": {
+      "faq": "FAQ"
+   },
+   "gender": {
+      "title": "Gender",
+      "1": "Male",
+      "2": "Female",
+      "3": "Other"
+   },
+   "group": {
+      "title": "Group",
+      "1": "Family",
+      "2": "Relative",
+      "3": "Friends",
+      "4": "Co-workers"
+   },
+    "user":{
+       "email":"Email",
+       "email_read_only": "Email Id cannot be changed",
+       "error_email_empty": "Please provide your E-Mail ID",
+      "error_email_invalid": "The email address you entered is incorrect",
+      "ok_to_use_this_email" : "OK to use this email",
+      "error_email_in_use": "The email address already exist"
+   },
+   "faq":{
+       "heading":"FREQUENT ASKED QUESTIONS",
+       "q1": "Question1?", 
+       "a1":"Answer1",
+       "q2":"Question2?",
+       "a2":"Answer2"
+   }
+}

@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.chang.ng.phone</groupId>
+	<artifactId>ng-phone</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Phonebook web demo application</name>
+	<description>Phonebook web demo application</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.2.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<start-class>com.chang.ng.phone.StartApplication</start-class>
+		<tomcat.version>7.0.59</tomcat.version>
+		<java.version>1.7</java.version>
+	</properties>
+
+	<modules>
+		<module>ng-phone-api</module>
+		<module>ng-phone-ui</module>
+	</modules>
+    
+    <dependencies>
+        <!-- Get the dependencies of a web application -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+                    <meminitial>1024m</meminitial>
+                    <maxmem>2024m</maxmem>
+                    <webapps>
+                        <webapp>
+                            <contextPath>/</contextPath>
+                            <groupId>com.chang.ng.phone</groupId>
+                            <artifactId>ng-phone-ui</artifactId>
+                            <version>1.0-SNAPSHOT</version>
+                            <type>war</type>
+                            <asWebapp>true</asWebapp>
+                        </webapp>
+                        <webapp>
+                            <contextPath>/api</contextPath>
+                            <groupId>com.chang.ng.phone</groupId>
+                            <artifactId>ng-phone-api</artifactId>
+                            <version>1.0-SNAPSHOT</version>
+                            <type>war</type>
+                            <asWebapp>true</asWebapp>
+                        </webapp>
+                    </webapps>
+                </configuration>
+            </plugin>
+            
+        </plugins>
+    </build>
+
+
+    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven2 apache plugins snapshots</id>
+            <url>https://repository.apache.org/content/repositories/snapshots/org/apache/tomcat/maven/tomcat7-maven-plugin/2.3-SNAPSHOT</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    
+
+</project>

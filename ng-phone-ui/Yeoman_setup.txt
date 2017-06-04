@@ -1,0 +1,75 @@
+Only for developers:
+
+Fresh Installation of Yeoman...
+
+	1. Download Node.js from http://nodejs.org/ , install and add to path 
+
+	2. Install generators using these commands
+	   --> npm install -g yo
+	   --> npm install -g grunt-cli
+	   --> npm install -g bower
+    3. goto ng-phone-ui folder in command prompt
+	4. npm install grunt --save-dev
+	5. npm install grunt-contrib-watch --save-dev
+	   npm install --save-dev load-grunt-tasks
+	   npm install grunt-serve --save-dev
+	   cd yo
+	   bower install
+    6. cd yo: grunt serve
+    7. browser gets opened with the application home page.
+
+
+The following instructions are more for creating a brand new application but remember server commands
+
+Fresh Installation of Yeoman...
+
+	1. Download Node.js from http://nodejs.org/ , install and add to path 
+
+	2. Download GIT from http://git-scm.com/, install  and add to path
+
+	3. configure git using command : git config --global url."https://".insteadOf git://
+
+	4. Download Ruby from https://www.ruby-lang.org/en/, install  and add to path
+
+	5. Install sass using this command: gem install sass --version "3.2.10"
+
+	6. Install compass using this command : gem install compass --version "0.12.2" 
+
+	
+	7. Install generators using these commands
+	   --> npm install -g yo
+	   --> npm install -g grunt-cli
+	   --> npm install -g bower
+	   --> npm install -g generator-webapp
+       --> npm install -g generator-angular
+
+	8. Create a folder, go into it and run command: yo angular.
+
+	9. Once step 8 is done run command: grunt serve
+
+If already Installed:
+
+	1. Configure git using command : git config --global url."https://".insteadOf git://
+
+	2. Run commands to clean npm and bower
+	   ---> npm cache clean
+	   ---> bower cache clean
+
+	3. Run commands to uninstall Compass and sass 
+	   ---> gem uninstall compass
+	   ---> gem uninstall sass
+
+	4. Run commands to install sass and compass the following versions
+	   ---> gem install sass --version "3.2.10"
+	   ---> gem install compass --version "0.12.2" 
+
+	5. Install generators using these commands
+	   --> npm install -g yo
+	   --> npm install -g grunt-cli
+	   --> npm install -g bower
+	   --> npm install -g generator-webapp
+
+	6. Create a folder, go into it and run command: yo angular.
+
+	7. Once step 6 is done run command: grunt serve
+

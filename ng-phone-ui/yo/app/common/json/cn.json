@@ -1,0 +1,49 @@
+{
+ "buttons": {
+      "submit": "提交",
+      "no":"No",
+      "yes":"Yes"
+   },
+   "common":{
+       "email":"邮箱",
+       "login":"登陆"
+   },
+   "header": {
+     "users":"用户",
+     "groups":"群组",
+     "login": "登陆",
+     "logout": "退出"
+   },
+   "footer": {
+      "faq": "问题&答案"
+   },
+   "gender": {
+      "title": "性别",
+      "1": "男",
+      "2": "女",
+      "3": "其他"
+   },
+   "group": {
+      "title": "Group",
+      "1": "Family",
+      "2": "Relative",
+      "3": "Friends",
+      "4": "Co-workers"
+   },
+   "user":{
+       "email":"邮箱",
+        "email_read_only": "Email Id cannot be changed",
+       "error_email_empty": "Please provide your E-Mail ID",
+       "error_email_invalid": "The email address you entered is incorrect",
+       "ok_to_use_this_email" : "OK to use this email",
+       "error_email_in_use": "The email address already exist"
+   },
+   
+   "faq":{
+       "heading":"频繁被问的问题",
+       "q1": "问题1?", 
+       "a1":"答案1",
+       "q2":"问题2?",
+       "a2":"答案2"
+   }
+}

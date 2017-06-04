@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.chang.ng.phone</groupId>
+		<artifactId>ng-phone</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>ng-phone-ui</artifactId>
+	<packaging>war</packaging>
+	<name>ng-phone UI</name>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.trecloux</groupId>
+				<artifactId>yeoman-maven-plugin</artifactId>
+				<version>0.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>yo/dist</directory>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>yo/dist</directory>
+						</fileset>
+						<fileset>
+							<directory>yo/.tmp</directory>
+						</fileset>
+						<fileset>
+							<directory>yo/app/components</directory>
+						</fileset>
+						<fileset>
+							<directory>yo/node_modules</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

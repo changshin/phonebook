@@ -1,0 +1,44 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{header}}</h3>
+</div>
+<!-- body -->
+<div class="modal-body" >
+	<div class="table-responsive" style="max-height:400px;overflow:auto;">
+		<table  class="table table-condensed table-hover table-responsive">
+			<thead>
+				<tr class="header">
+					<th></th>
+					<th class="user_header"><a href="" data-ng-click="orderName = 'firstName'; reverse=!reverse">First Name</a></th>
+					<th class="user_header"><a href="" data-ng-click="orderName = 'lastName'; reverse=!reverse">Last Name</a></th>
+					<th class="user_header"><a href="" data-ng-click="orderName = 'email'; reverse=!reverse">email</a></th>
+					<th class="user_header"><a href="" data-ng-click="orderName = 'genderName'; reverse=!reverse" >Gender</a></th>
+					<th class="user_header"><a href="" data-ng-click="orderName = 'updatedDate'; reverse=!reverse">Updated</a></th>
+					<th class="user_header"><a href="" data-ng-click="orderName = 'createdDate'; reverse=!reverse">Created</a></th>
+					<th><input type="checkbox" ng-click="selectAllOrNot()"  title="Select all or unslect all" style="padding-top:5px;">
+						<img ng-src="/images/trash.png" style="width:35px;height:35px;margin-left:-5px;" />
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="user in users | orderBy:orderName:reverse track by user.id ">
+					<td>
+						<a >
+							<img class="img-circle" style="width:40px;height:40px" nocachesrc="{{user.avatarPath || '/images/default_avatar.png'}}" />
+						</a>
+					</td>
+					<td>{{ user.firstName}}</td>
+					<td>{{ user.lastName}}</td>
+					<td>{{ user.email}}</td>
+					<td>{{ user.genderName}}</td>
+					<td>{{ user.updatedDate | date: 'MM/dd/yyyy'}}</td>
+					<td>{{ user.createdDate | date: 'MM/dd/yyyy'}}</td>
+					<td><input type="checkbox" ng-model="selection.ids[user.id]">
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-info button-xs" ng-click="cancel()">Cancel</button>
+    <button ng-if="selectedIds" class="btn btn-info button-xs" ng-click="deleteUsers()">Delete</button>
+</div>

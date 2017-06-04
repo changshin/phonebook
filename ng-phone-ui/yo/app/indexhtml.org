@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-wizard/dist/angular-wizard.min.css" />
+    <link rel="stylesheet" href="bower_components/jcrop/css/jquery.Jcrop.css" />
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="/styles/home.css" />
+    <!-- endbuild -->
+
+	
+    <body class="home page page-template-default logged-in page-new-home get-the-app page-get-the-app " ng-app="ngphoneUIApp">
+        <!--[if lt IE 8]>
+    <div class="alert alert-warning">
+      You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.    </div>
+  <![endif]-->
+        <div ng-controller="MainCtrl" id="container">
+            <header id="header" role="banner">
+                <div ng-include="header_view"></div>
+            </header>
+            <div class="alert-message alert-message-tp text-center clearfix" id="alert">
+           		<alert ng-if="alert" type="{{alert.type}}" close="closeAlert()">
+                	<span ng-bind="alert.msg"></span> 
+               	 </alert>
+            </div>
+            <div class="row clearfix row-ht-100" id="body" >
+                <div class="col-md-1 col-lg-1 col-xs-1"></div>
+               	<div id="contentViewId" class="col-lg-10 col-md-10 col-sm-12 col-xs-12 menu-padding content-view row-ht-100">
+                    <div id="index-content-view" class="col-xs-12 row-ht-100 indexContentView">
+                        <ng-view></ng-view>
+                    </div>
+                </div>
+            </div>
+            <!--Page Loader Block UI-->
+            <div id="page_loader_block" data-ng-show="$root.showLoader"></div>
+            <div id="page_loader_image" data-ng-show="$root.showLoader">
+                <img src="images/loading300.gif" />
+            </div>
+        </div>
+       
+        <!-- build:js(.) scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-touch/angular-touch.js"></script>
+        <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
+        <script src="bower_components/jcrop/js/jquery.Jcrop.js"></script>
+        <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+        <script src="bower_components/ng-jcrop/ng-jcrop.js"></script>
+        <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+        <script src="bower_components/Chart.js/Chart.js"></script>
+        <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+        <script src="bower_components/angular-re-captcha/angular-re-captcha.js"></script>
+        <script src="bower_components/angular-l10n/angular-l10n.js"></script>
+        <script src="bower_components/angular-translate/angular-translate.js"></script>
+        <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
+        <script src="scripts/libs/jquery-ui.min.js"></script>
+        <script src="scripts/libs/angular-input-match.min.js"></script>
+        <script src="scripts/libs/ui-bootstrap-0.12.1.js"></script>
+        <script src="scripts/libs/ui-bootstrap-tpls-0.12.1.js"></script>
+        <script src="scripts/libs/jcarousel.js"></script>
+        <script src="scripts/libs/jquery.Jcrop.min.js"></script>
+        <script src="scripts/libs/ngDraggable.js"></script>
+        <script src="scripts/libs/checklist-model.js"></script>
+        <script src="scripts/libs/nsPopover.js"></script>
+        <script src="scripts/libs/ui-iris.js"></script>
+        <script src="scripts/libs/ng-file-upload.js"></script>
+        <script src="scripts/libs/chosen.jquery.min.js"></script>
+        <script src="scripts/libs/chosen.js"></script>
+        <script src="scripts/libs/jquery.elevatezoom.js"></script>
+        <script src="scripts/libs/jquery.cluetip.js"></script>
+        <script src="scripts/libs/jquery.cluetip.image.js"></script>
+        
+        <!-- Main App JS -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/login/controller.js"></script>
+        <script src="scripts/user/controller.js"></script>
+
+        <script src="scripts/directive/nocache.js"></script>
+        <script src="scripts/directive/ngConfirm.js"></script>
+        <script src="scripts/directive/toNumber.js"></script>
+        <script src="scripts/directive/enterDirective.js"></script>
+        <script src="scripts/directive/allowPattern.js"></script>
+
+        <script src="scripts/services/http.js"></script>
+        <script src="scripts/services/dbFactory.js"></script>
+        <script src="scripts/services/interval.js"></script>
+        <script src="scripts/services/filter.js"></script>
+        
+
+        <!--  directives -->
+        
+        <!-- endbuild -->
+        <script >
+        	if (!String.prototype.startsWith) {
+        		String.prototype.startsWith = function( str ) {
+        		    return str.length > 0 && this.substring( 0, str.length ) === str;
+        		}
+        	}
+         	if (!String.prototype.endsWith) {
+                String.prototype.endsWith = function(suffix) {
+	               	 if (this.length < suffix.length)
+    		           	 return false;
+            	   	 return this.lastIndexOf(suffix) === this.length - suffix.length;
+               	}
+       		}
+        </script>	
+    </body>
+
+</html>

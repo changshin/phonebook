@@ -1,0 +1,30 @@
+<div class="col-md-1 col-sm-1 col-lg-1 col-xs-1"></div>
+<div class="col-md-11 col-sm-11 col-lg-11 col-xs-11">
+		<div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+			<a ng-href="http://www.tp-link.com/us/"  target="_blank"><img ng-src="/images/home/tp-link-logo.png" style="margin-top:10px"/></a>
+		</div>
+		<div class="nav col-md-10 col-sm-10 col-lg-10 col-xs-10">
+			<div class="col-md-1 col-sm-1 col-xs-2 mgtop" >
+				<a href="#/faq""><translate>footer.faq</translate></a>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2 mgtop" >
+				<a href="#/users"><translate>header.users</translate></a>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2 mgtop">
+				<a href="#/groups" ><translate>header.groups</translate></a>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2 mgtop" data-ng-if="!loggedIn">
+				<a href="#/login" ><translate>header.login</translate></a>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2 mgtop" data-ng-if="loggedIn">
+				<a ng-click="logout()"><translate>header.logout</translate></a>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2 mgtop" >
+				<select  name="language" ng-model="languageSelected"	ng-change="changeLanguage(languageSelected)" >
+					<option value="en">English</option>
+					<option value="cn">简体中文</option>
+				</select>
+			</div>
+		</div>
+		
+</div>

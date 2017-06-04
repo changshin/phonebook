@@ -1,0 +1,161 @@
+<div ng-include="currentView" class="row row-ht-100 rounded-corner vertical-scroll m-l-p1em " ></div>
+
+<script type="text/ng-template" id="list.html">
+
+<div class="row-ht-100">
+	<div class="row-ht-15 adjust clearfix" style="margin-bottom:-10px">
+			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+				<h4>Users</h4>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+				<div class="add_user" >
+					<button ng-click="editUser()" class="btn btn-info pull-right button-xs button-sm">Add User</button>
+				</div>
+			</div>
+	</div>
+	<div class="line"></div>
+	<div class="row-ht-85 w-100" style="overflow:auto;clear:both">
+		<div >
+			<div >
+  				<table  class="table table-condensed table-hover table-responsive">
+				<thead>
+					<tr class="header">
+						<th></th>
+						<th class="user_header"><a href="" data-ng-click="orderName = 'firstName'; reverse=!reverse">First Name</a></th>
+						<th class="user_header"><a href="" data-ng-click="orderName = 'lastName'; reverse=!reverse">Last Name</a></th>
+						<th class="user_header"><a href="" data-ng-click="orderName = 'email'; reverse=!reverse"><translate>common.email</translate></a></th>
+						<th class="user_header"><a href="" data-ng-click="orderName = 'genderName'; reverse=!reverse" ><translate>gender.title</translate></a></th>
+						<th class="user_header"><a href="" data-ng-click="orderName = 'groupNames'; reverse=!reverse" >Groups</a></th>
+						<th class="user_header"><a href="" data-ng-click="orderName = 'updatedDate'; reverse=!reverse">Updated</a></th>
+						<th class="user_header"><a href="" data-ng-click="orderName = 'createdDate'; reverse=!reverse">Created</a></th>
+						<th><input type="checkbox" ng-click="selectAllOrNot()"  title="Select all or unslect all"></th>
+						<th class="user_header" ng-click="deleteUsers()" title="Delete selected users">
+							<img ng-src="/images/trash.png" style="width:35px;height:35px;margin-left:-10px;margin-bottom:-5px" />
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="user in users | orderBy:orderName:reverse track by user.id ">
+						<td>
+							<a >
+								<img class="img-circle" style="width:40px;height:40px" nocachesrc="{{user.avatarPath || '/images/default_avatar.png'}}" />
+							</a>
+						</td>
+						<td>{{ user.firstName}}</td>
+						<td>{{ user.lastName}}</td>
+						<td><a href="" ng-click="editUser(user)">{{ user.email}}</a></td>
+						<td>{{ user.genderName}}</td>
+						<td>{{ user.groupNames}}</td>
+						<td>{{ user.updatedDate | date: 'MM/dd/yyyy'}}</td>
+						<td>{{ user.createdDate | date: 'MM/dd/yyyy'}}</td>
+						<td><input type="checkbox" ng-model="selection.ids[user.id]">
+						<td>
+							<label ng-click="deleteUser(user)" 
+								ng-confirm-size="md"
+								ng-confirm-header="Delete user"
+								ng-confirm="Would you like to delet user?">
+								<a href=""></a>
+							</label>
+						</td>
+					</tr>
+				</tbody>
+				</table>
+ 
+			</div>
+		</div>
+	</div>
+</div>
+</script>
+
+<script type="text/ng-template" id="edit.html">
+	<form name="myForm1" novalidate>
+		<div class="col-sm-12 col-md-12 col-lg-12" style="vertical-align: middle;min-height: 16px;margin-top: 15px;padding-bottom:5px;border-bottom: 1px solid #e5e5e5">
+			<div class="col-sm-3 col-md-3 col-lg-3" style="margin-top:-5px">
+				<span style="font-size:1.5em;font-weight:bold" ng-if="userDetails.id== undefined">Add User</span>
+				<span style="font-size:1.5em;font-weight:bold" ng-if="userDetails.id != undefined">Update User</span>
+			</div>
+		</div>
+		<div class="row form-group"></div>
+		<div style="text-align:center;" ng-if="error_msg.length>0" class="ng-hide alert alert-danger ">{{error_msg}}</div>
+		<div id="error_invalid" ng-if="myForm1.invalid" style="text-align: center" class="alert alert-danger">Please chdeck mandotory fields.</div>
+		<div class="form-group required col-md-12 col-sm-12 col-xs-12">
+			<div class="col-sm-2 col-md-2 control-label" style="margin-left:15px;margin-right:-25px">	
+				<b><translate>header.groups</translate></b>
+			</div>
+			<div class="col-sm-9 col-md-9">	
+				<label ng-repeat="group in groups">
+  				<input type="checkbox" ng-model="selectedGroups.ids[group.id]" class="checkbox">
+  				 <span style="margin-right:20px">{{group.name}}<span>
+			</label>
+			</div>
+		</div>	
+
+		<div class="form-group required col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group required col-md-6 col-sm-6 col-xs-12">
+				<label for="email" class="col-sm-4 col-md-4 control-label" style="margin-right:-20px"><translate>user.email</translate></label>
+				<div class="col-sm-7 col-md-7">
+					<input ng-model="userDetails.email" type="text" name="email" class="form-control2" id="email" placeholder="{{'user.email' | translate}}"
+						ng-pattern="/^[+_A-Za-z0-9-]+(\.[+_A-Za-z0-9-]+)*@[+A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$/"
+						ng-disabled="userDetails.userId != undefined" ng-blur="isEmailExists(myForm1)" required> 
+					<span style="color: red" ng-if="myForm1.email.$dirty && userDetails.userId != undefined">{{"user.email_read_only" | translate}} </span> 
+					<span style="color: red" ng-show="myForm1.email.$dirty && myForm1.email.$invalid"> 
+						<span ng-show="myForm1.email.$error.required" class="help-block">{{"user.error_email_empty" | translate}}</span> 
+					</span>
+				</div>
+			</div>
+
+			<div class="form-group required col-md-6 col-sm-6 col-xs-12">
+				<label for="gender" class="col-sm-4 col-md-4 control-label" style="margin-right:-20px"><translate>gender.title</translate></label>
+				<div class="col-sm-7 col-md-7">
+					<select	id="gender"	name="gender" ng-model="userDetails.genderId" 
+						data-ng-options="gender.id as gender.name for gender in genders" required>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group required col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group required col-md-6 col-sm-6 col-xs-12">
+				<label for="first_name" class="col-sm-4 col-md-4 control-label" style="margin-right:-20px">First Name</label>
+				<div class="col-sm-7 col-md-7">
+					<input ng-model="userDetails.firstName" type="text"
+						class="form-control2" id="firstName" name="first_name" placeholder="" 	maxlength="30" required>
+				</div>
+				<div ng-messages="myForm1.first_name.$error"  ng-if='myForm1.first_name.$touched'  >
+   					<span ng-message="required" class="help-block2">Please type first name.</span>
+				</div>
+			</div>
+			<div class="form-group required col-md-6 col-sm-6 col-xs-12">
+				<label for="last_name" class="col-sm-4 col-md-4 control-label" style="margin-right:-20px">Last Name</label>
+				<div class="col-sm-7 col-md-7">
+					<input ng-model="userDetails.lastName" type="text"	class="form-control2" name="last_name" placeholder=""
+						maxlength="30" required>
+				</div>
+				<div ng-messages="myForm1.last_name.$error"  ng-if='myForm1.last_name.$touched'  >
+   					<span ng-message="required" class="help-block2">Please type last name.</span>
+				</div>
+			</div>
+		</div>
+
+
+	</form>
+ 
+ 	<div class="row form-group col-md-12" style="margin-top: 10px;">
+		<div class="col-sm-7 col-md-7"></div>
+		<div class="col-sm-5 col-md-5">
+			<button class="btn btn-dark" ng-click="cancel()">Cancel</button>
+			<button id="add" ng-if="userDetails.id == 0" type="button" class="btn btn-info button-xs button-sm" ng-disabled="userDetails.useExistEmail != undefined && !userDetails.useExistEmail" ng-click="submit(myForm1)" 
+				ng-confirm-size="md"
+				ng-confirm-header="Add user"
+				ng-confirm="Would you like to add user?">
+				Add
+			</button>
+			<button ng-if="userDetails.id > 0" type="button" class="btn btn-info button-xs button-sm" ng-click="submit(myForm1)" 
+				ng-confirm-size="md"
+				ng-confirm-header="Update user"
+				ng-confirm="Would you like to update user?">
+				Update
+			</button>
+		</div>
+	</div>
+</script>

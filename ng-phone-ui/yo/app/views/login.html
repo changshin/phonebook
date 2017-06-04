@@ -1,0 +1,38 @@
+<div class="wrap" role="document">
+	<div class="content row p-t2em">
+		<div class="col-lg-3 col-md-2 col-sm-2 col-xs-1"></div>
+		<div class="col-lg-6 col-md-7 col-sm-7 col-xs-10">
+			Please type any characters and then click "Submit" button.
+			</br></br>
+			<span class="blue basicFont-login" ng-style="applyColor()"><h4><translate>common.login</translate></h4></span>
+			</br></br>
+			<div class="wppb_holder" id="wppb_login">
+				<form class="sign-in" name="loginForm" 	ng-submit="loginUser(loginForm)" novalidate>
+					<p id="error_invalid" ng-if="loginForm.invalid" class="alert alert-danger">Enter valid email id and password to login.</p>
+					<div class="form-group required">
+						<label for="user-name" class="control-label"><translate>common.email</translate></label> 
+						<input type="text" name="user-name" id="user-name" 
+							class="text-input form-control" value="" ng-model="userDetails.email" required />
+					</div>
+					<div class="form-group required">
+						<label for="password" class="control-label"><translate>Password</translate></label> 
+						<input type="password" name="password"
+							id="password" class="text-input form-control" ng-model="userDetails.password" required />
+					</div>
+					
+					<div class="row">
+						<div class="col-md-5">
+							<a href="#/login" class="pull-left adjust" style="white-space: nowrap;">Forgot Password?</a>
+						</div>
+						<div class="col-md-5">
+							No Accounts?<a href="#/login" class=""></br><b>Register</b></a>
+						</div>
+						<div class="col-md-2 adjust">
+							<input type="submit" name="submit" 	class="btn btn-info pull-right" value="{{'buttons.submit' | translate}}" id="btnLogin" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

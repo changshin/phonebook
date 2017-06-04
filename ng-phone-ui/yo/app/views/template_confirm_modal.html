@@ -1,0 +1,10 @@
+<!--  using bootstrap css -->
+<div class="modal-header">
+	<h4 class="modal-title">{{messageHeader && messageHeader !='' ? messageHeader : 'Confirmation'}}</h4>
+</div>
+<span class="modal-body_warning" ng-show="messageWarning  && messageWarning !=''">{{messageWarning}}</span>
+<div class="modal-body"><p ng-bind-html="message"></p></div>
+<div class="modal-footer">
+    <button class="btn btn-black pull-left" style="margin-right:20px;" ng-click="no()">{{"buttons.no" | translate}}</button>
+    <button class="btn btn-primary pull-left" ng-click="yes()">{{"buttons.yes" | translate}}</button>
+</div>

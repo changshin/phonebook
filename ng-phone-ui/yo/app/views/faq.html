@@ -1,0 +1,38 @@
+<div ng-if="mobile"  style="margin-top:50px;margin-left:3%;width:100%;font-size:20px">
+	<span class="basicFont clearfix">{{"faq.heading" | translate}}</span>
+</div>
+<div class="container-fluid h-47em">
+	<div class="row text-center" ng-if="!mobile">
+		<span class="basicFont staticLH60 staticFS40 clearfix">{{"faq.heading" | translate}}</span>
+	</div>
+	<div class="row p-t3em">
+		<div class="col-md-offset-2 col-md-8 vertical-scroll row-ht-70">
+			<accordion close-others="true" ng-init="activeAccordion='upload'">
+				<accordion-group is-open="true"> 
+					<accordion-heading>
+						<img class="block" id="u748_img" src="images/question.png" alt="" width="37" height="35"> <translate>faq.q1</translate>
+					</accordion-heading>
+					<div class="inner-content">
+						<div class="col-md-12">
+							<img class="block" id="u748_img" src="images/arrowgray.png" alt=""	width="37" height="35"> 
+							<translate>faq.a1</translate>
+						</div>
+					</div>
+				</accordion-group> 
+				<accordion-group> 
+					<accordion-heading>
+						<img class="block" id="u748_img" src="images/question.png" alt="" width="37" height="35"> <translate>faq.q2</translate>
+					</accordion-heading>
+					<div class="inner-content">
+						<div class="col-md-12">
+							<img class="block" id="u748_img" src="images/arrowgray.png" alt="" 	width="37" height="35"> 
+							<translate>faq.a2</translate>
+						</div>
+					</div>
+				</accordion-group> 
+			</accordion>
+
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>
