@@ -1,8 +1,7 @@
-========== I tested it: ===========
+========== It is tested: ===========
 
 On Mac Sierra version 10.12.5
 Java version: 1.7.0_80
-Java 1.7
 Tomcat 7
 Spring boot 1.5.2 and MVC
 MySQL: 5.6.25 MySQL Community Server (GPL)
@@ -16,9 +15,15 @@ Please check Yeoman_setup.txt in the ng-phone-ui folder, if you have an issue
 
 ========= How to create MySQL Database ===========
 
-in terminal
-go to the folder you download, I used it:
+In terminal
+Go to the folder you downloaded.
+I used it:
 cd /Users/chang/projects/ng-phone/docs
+
+mysql -uroot -p < phonebook.sql
+
+or 
+
 mysql -uroot -p 
 type [your_own_password]
 create database phonebook
@@ -26,22 +31,19 @@ exit
 mysql -uroot -p  phonebook< phonebook.sql
 
 If you has your own mysql root password, 
-please change the password in the application.properties in the ng-phone-api/src/main/resources folder
+Please change the password in the application.properties in the ng-phone-api/src/main/resources folder
 
 
-Mysql the sql file in the doc folder
+=========== Back end API: ===============
 
-
-========= Back end API: ===============
-
-Java 1.7
-MySQL
+Java version: 1.7.0_80
+MySQL: 5.6.25 MySQL Community Server (GPL)
 Spring boot 1.5.2 and MVC
-Security is reserved.
-Use Cross-Origin Resource Sharing (CORS) for demo task
+
+Cross-Origin Resource Sharing (CORS) option is used for demo task
 log4j, phonebook.log is in /var/log/tomcat7/ folder
 
-Features: 
+Next version: 
 1. Login and Security
 2. Avatar upload for user and groups
 3. Thumbnail for performance
@@ -54,37 +56,42 @@ Features:
 
 
 
-================= Front end (UI) =================
+============ Front end (UI) =================
 
 Node.js
 NPM
-AngualrJS 1.5, Local language support sample
+AngualrJS 1.6, Local language support sample
 Grunt
 Use bootstrap css
-simple Less
+Less
 CSS Responsive
-local language support files are in common/json folder
+Local language support files are in common/json folder
 
-Login UI is  simple UI to show login. Just type any word and click "submit"
-User UI:  add new user, table sorting, multi selection to delete users
-Groups UI: pie chart, view users from clicking number or click the group part of pie chart, multi selection to delete user on modal window
-You can not delete the groups with users.
+There are four UIs
 
-Futures: 
+1. FAQ
+2. Login UI is  simple UI to show login. Just type any word and click "submit"
+3. User UI:  add new user, table sorting, multi selection to delete users
+3. Groups UI: pie chart, view users from clicking number or click the group part of pie chart, multi selection to delete user on modal window
+   You can not delete the groups with users. without users, you can delete the groups.
 
-1. Inline css should be changed to css file
-2. International phone format
-3. User or group avatar image cropping
-4. Add more the detail for local language support
-5. Welcome information after logged in with email message
+Next Version: 
+
+1. Inline css should be changed to css file.
+2. International phone format.
+3. User or group avatar image cropping.
+4. Add more the detail for local language support.
+5. Welcome information after logged in with email message.
 
 
 
-=============== How to test it ================
+=========== How to test it ================
 
 Go to the folder in terminal
-cd /Users/chang/projects/ng-phone
-mvn clean install -DskipTests=true: When it is done, you can the below messages:
+cd /[downaloaded folder/ng-phone
+
+1. Create war file
+   mvn clean install -DskipTests=true: When it is done, you can the below messages:
 ..
 ..
 [INFO] Reactor Summary:
@@ -99,9 +106,9 @@ mvn clean install -DskipTests=true: When it is done, you can the below messages:
 [INFO] Finished at: Thu Jun 01 15:14:43 PDT 2017
 [INFO] Final Memory: 37M/459M
 
-// start maven command to start tomcat 7 module
+2. Start maven command to start tomcat 7
 
-mvn tomcat7:run
+   mvn tomcat7:run
 
 ..
  .   ____          _            __ _ _
@@ -112,4 +119,5 @@ mvn tomcat7:run
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v1.5.2.RELEASE)
 
-in the browser: localhost:8080
+3. Test it on browser
+   localhost:8080
