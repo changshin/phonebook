@@ -38,23 +38,9 @@ public class BaseController {
 
 	private static final Logger logger = LogManager.getLogger(BaseController.class);
 
-	@Value("${file.path}")
-	protected String uploadFilePath;
-
-	@Value("${file.context.path}")
-	protected String contextPath;
-
-
-	@Value("${app.salt}")
-	protected String salt;
-
-	@Value("${recaptcha.secret}")
-	protected String captchaSecret;
 
 	@Autowired
 	protected UserService userService;
-
-	private ReCaptchaImpl captchaImpl = new ReCaptchaImpl();
 
 	public ResourceBundle bundle = ResourceBundle.getBundle("messages", new Locale("en"));
 
@@ -81,13 +67,6 @@ public class BaseController {
 		bundle = ResourceBundle.getBundle("messages", new Locale(language));
 		return CommonUtils.toUTF8(bundle.getString(key));
 	}
-
-	public String getUploadFilePath() {
-		return uploadFilePath;
-	}
-	public String getContextPath() {
-		return contextPath;
-	}
 	
 	public String getLanguage(HttpServletRequest request) {
 		String language = request.getHeader("Language");
@@ -109,47 +88,5 @@ public class BaseController {
 
 		return user;
 	}
-
-
-
-	public String uploadProfileAvatar(MultipartFile uploadFile,long userId) {
-		try {
-
-			StringBuffer filePath = new StringBuffer();
-			// Get File Extension
-			if (uploadFile != null) {
-				// save upload file and insert path into corner table.
-				String fileName = uploadFile.getOriginalFilename();
-				String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
-
-				StringBuffer newfilePath = new StringBuffer();
-				newfilePath.append(uploadFilePath).append(Constants.FILE_SEPARATOR).append("AVATAR_")
-						.append(userId).append(".").append(fileExtension);
-
-				File file = ImageUtil.uploadImage(uploadFile, newfilePath.toString());
-				// crop image size to 150X150
-				ImageUtil.resizeImage(file, newfilePath.toString(), 150);
-
-				filePath.append(contextPath).append(Constants.FILE_SEPARATOR).append("AVATAR_").append(userId)
-						.append(".").append(fileExtension);
-
-			}
-
-			return filePath.toString();
-		} catch (Exception e) {
-			logger.error("error in uploadProfileAvatar : ", e);
-		}
-		return null;
-	}
-
-	public String getEncryptedPassword(String password) {
-		String encryptPassword = null;
-		if (StringUtils.isNotBlank(password)) {
-			byte[] saltInBytes = Base64.decode(salt);
-			encryptPassword = CryptoUtil.encryptPassword(password, saltInBytes);
-		}
-		return encryptPassword;
-	}
-
 	
 }

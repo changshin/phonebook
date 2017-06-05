@@ -203,44 +203,6 @@ public class UserController  extends BaseController{
 			user.setLastName( userRequest.getLastName() );
 			user.setGenderId( userRequest.getGenderId() );
 		    
-//			if  ( userRequest.getType().equalsIgnoreCase("add") && user.getPassword() == null ) {
-//		    	user.setPassword("password");
-//		    	user.setPassword(getEncryptedPassword(user.getPassword()));
-//		    }
-		    
-		    
-//    		Map<String,String[]> allMap = request.getParameterMap();
-//		    for(String key:allMap.keySet()){
-//		    	String[] strArr=(String[])allMap.get(key);
-//		        for(String val:strArr){
-//		            System.out.println("map param= "+key+":"+val);
-//		        }   
-//		    }
-		    InputStream avatar = null;
-		    String fileName = null;
-//		    for (Part part : request.getParts()) {
-//		        if(part.getContentType() == null) {
-//		            continue;
-//		        }
-//		        System.out.println("Part name: " + part.getName());
-//		        System.out.println("Part Size: " + part.getSize());
-//		        System.out.println("Part Content Type: " + part.getContentType());
-//		        avatar = part.getInputStream();
-//				fileName = ServletUtil.getFileName(part);
-//				System.out.println("Part fileName="+fileName);
-//				break;
-//		    }
-		    
-//		    MultipartFile avatarFile = null;
-//			try {
-//				avatarFile = (MultipartFile) ((MultipartHttpServletRequest) request).getFile("avatar");
-//			} catch (Exception ex) {
-//				System.out.println("processProfileUpdate,file error=" + ex);
-//			}
-//			if (avatarFile != null) {
-//				System.out.println("avatarFile,Original fileName - "	+ avatarFile.getOriginalFilename());
-//				System.out.println("avatarFile, fileName = " + avatarFile.getName() + ":"	+ avatarFile.getSize());
-//			}
 
 		    
 		    user.setUpdatedDate( new Date() );
@@ -249,9 +211,6 @@ public class UserController  extends BaseController{
 		    }
 		    user.setDeleted(( byte)0 );
 		    userService.save( user, userRequest.getGroupsIds() );
-		    if (avatar != null) {
-				uploadProfileAvatar(avatar,fileName, user);
-			}
 		    UserResponse userResponse = new UserResponse();
 		    BeanUtils.copyProperties(user, userResponse);
 		    
@@ -263,79 +222,7 @@ public class UserController  extends BaseController{
     	return response;
     	
     }
-    
-    public void uploadProfileAvatar(InputStream uploadFile,String fileName ,User user) {
-		try {
-
-			// Get File Extension
-			String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
-
-			StringBuffer avatarUrl = new StringBuffer();
-			avatarUrl.append(Constants.FILE_SEPARATOR).append("AVATAR_").append(user.getId()).append(".").append(fileExtension);
-			user.setAvatarUrl(avatarUrl.toString());
-
-			StringBuffer newfilePath = new StringBuffer( getUploadFilePath() );
-			newfilePath.append(avatarUrl);
-			File file = new File( newfilePath.toString() );
-			FileUtils.copyInputStreamToFile(uploadFile, file);
-
-			newfilePath = new StringBuffer( getUploadFilePath() );
-			avatarUrl = new StringBuffer();
-			avatarUrl.append(Constants.FILE_SEPARATOR).append("AVATAR_thumbnail").append(user.getId()).append(".").append(fileExtension);
-			user.setAvatarThumbnail(avatarUrl.toString());
-
-			newfilePath.append(avatarUrl);
-			ImageUtil.resizeImage(file, newfilePath.toString(), THUMBNAIL_SIZE);
-		} catch (Exception e) {
-			logger.error("error in uploadProfileAvatar : ", e);
-		}
-		return;
-	}
-
-    
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Response userLogin(@RequestBody UserRequest loginRequest, HttpServletRequest request) {
-		Response response = null;
-		try {
-			String language = getLanguage(request);
-			String password = getEncryptedPassword( loginRequest.getPassword() );
-			
-			User user = userService.validateLogin(loginRequest.getEmail(), password);
-
-			if (user != null) {
-				String token = AuthTokenConfig.generateToken(user.getId());
-
-				UserResponse userResp = new UserResponse();
-			    BeanUtils.copyProperties(user, userResp);
-//				//userResp.setAccessToken(token);
-//
-//				buildPlatformInformation(request, loginRequest);
-
-				user.setLastLoggedIn(Calendar.getInstance().getTime());
-				userService.save(user);
-				HttpSession session = request.getSession();
-				session.setAttribute("user", user);
-				session.setAttribute("token", token);
-				// session.setMaxInactiveInterval( 60*30 ); // 30 minutes
-
-				response = ResponseHelper.buildResponse(userResp);
-			} else {
-				// bad credentials ....
-				try {
-					response = getFaildResponseMessage(language,"ERROR_MESSAGE_BAD_CREDENTIALS");
-				} catch (Exception ex) {
-					response = ResponseHelper.BAD_CREDENTIALS_EXCEPTION_RESPONSE;
-				}
-			}
-
-		} catch (Exception e) {
-			logger.error("error in usersList : ", e);
-			response = ResponseHelper.buildExceptionResponse(e);
-
-		}
-		return response;
-	}
-    
+      
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public Response userLogout(HttpServletRequest request) {
 		try {
