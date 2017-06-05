@@ -90,7 +90,7 @@ Next Version:
 Go to the folder in terminal
 cd /[downaloaded folder/ng-phone
 
-1. Create war file
+1. Create war files
    mvn clean install -DskipTests=true: When it is done, you can the below messages:
 ..
 ..
