@@ -7,7 +7,7 @@
  * 
  * Main module of the application.
  */
-angular.module(	'ngphoneUIApp',	[ 'ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 'ngSanitize',
+angular.module(	'ngphoneUIApp',	[ 'ngAnimate', 'ngCookies','ngRoute', 'ngSanitize',
 		  'ngTouch', 'ui.bootstrap','pascalprecht.translate','ngMessages','chart.js'],
 		[ '$translateProvider', function($translateProvider,$window) {
 			$translateProvider.useSanitizeValueStrategy(null);
@@ -17,8 +17,8 @@ angular.module(	'ngphoneUIApp',	[ 'ngAnimate', 'ngCookies', 'ngResource', 'ngRou
 			});
 			$translateProvider.preferredLanguage('en');
 		} ])
-		.config( function($routeProvider, $httpProvider, ChartJsProvider) {
-			
+		.config( function($routeProvider, $httpProvider, ChartJsProvider, $locationProvider) {
+			$locationProvider.hashPrefix('');
 			ChartJsProvider.setOptions({ 
 				colors : [ '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
 				responsive : true
